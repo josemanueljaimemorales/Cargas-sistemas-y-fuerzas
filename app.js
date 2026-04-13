@@ -1,11 +1,10 @@
-// 🔥 PEGA AQUÍ TU firebaseConfig
 const firebaseConfig = {
-  apiKey: "PEGA_AQUI",
-  authDomain: "PEGA_AQUI",
-  projectId: "PEGA_AQUI",
-  storageBucket: "PEGA_AQUI",
-  messagingSenderId: "PEGA_AQUI",
-  appId: "PEGA_AQUI"
+  apiKey: "AIzaSyBhs-MEQ7McQhs6pNZTa1AWqWwUYp8yvbU",
+  authDomain: "app-de-cargas-865db.firebaseapp.com",
+  projectId: "app-de-cargas-865db",
+  storageBucket: "app-de-cargas-865db.firebasestorage.app",
+  messagingSenderId: "848399214095",
+  appId: "1:848399214095:web:dd2f91ec522f2b5f44a57a"
 };
 
 firebase.initializeApp(firebaseConfig);
