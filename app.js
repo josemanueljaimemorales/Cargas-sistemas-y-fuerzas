@@ -77,7 +77,6 @@ function mostrar(tipo){
       html+=`<div class="card">${fila(k, data[tipo][k])}</div>`;
     }
   }
-document.getElementById("contenido").innerHTML = "";
   document.getElementById("contenido").innerHTML = html;
 }
 
