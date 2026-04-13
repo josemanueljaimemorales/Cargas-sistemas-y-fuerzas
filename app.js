@@ -22,6 +22,7 @@ let data = {
     "Rutinas sin caídas": "",
     "Intentos máximo": ""
   },
+
   sistemas: {
     "Semana de fuerza": "",
     "Abdomen CBR": "",
@@ -35,30 +36,35 @@ let data = {
     "Fuerza Cristos": "",
     "Patadas": ""
   },
+
   semanal: {
-  "Secuencias básicas": "",
-  
-  "Corrección de elementos": "",
-  "Elementos nuevos": "",
-  "Número de repeticiones": "",
-  
-  "Rutinas completas": "",
-  "Rep correcciones": "",
-  "Repetición de elementos nuevos": "",
-  
-  "Enlaces de rutina": "",
-  "Elementos por enlace": ""
-}
+    "Secuencias básicas": "",
+
+    "Corrección de elementos": "",
+    "Elementos nuevos": "",
+    "Número de repeticiones": "",
+
+    "Rutinas completas": "",
+    "Rep correcciones": "",
+    "Repetición de elementos nuevos": "",
+
+    "Enlaces de rutina": "",
+    "Elementos por enlace": ""
+  }
 };
 
 function fila(t, v){
-  return `<div class="item"><div class="label">${t}</div><div class="valor">${v || "-"}</div></div>`;
+  return `<div class="item">
+    <div class="label">${t}</div>
+    <div class="valor">${v || "-"}</div>
+  </div>`;
 }
 
 function mostrar(tipo){
   let html = "";
 
   if(tipo==="obligatorios"){
+
     html+=`<div class="card"><h3>Día 1 - Rutinas</h3>
     ${fila("Repetición elementos corrección", data.obligatorios["Rep elementos corrección"])}
     ${fila("Repetición elementos proyección", data.obligatorios["Rep elementos proyección"])}
@@ -129,15 +135,20 @@ function login(){
 
 function editar(){
   let html="<h2>Modo Entrenador</h2>";
+
   for(let tipo in data){
     html+=`<h3>${tipo}</h3>`;
+
     for(let k in data[tipo]){
       html+=`<div class="card">
-      <label>${k}</label>
-      <textarea onchange="actualizar('${tipo}','${k}',this.value)">${data[tipo][k]}</textarea>
+        <label>${k}</label>
+        <textarea onchange="actualizar('${tipo}','${k}',this.value)">
+${data[tipo][k]}
+        </textarea>
       </div>`;
     }
   }
+
   document.getElementById("contenido").innerHTML=html;
 }
 
