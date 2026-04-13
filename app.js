@@ -36,17 +36,19 @@ let data = {
     "Patadas": ""
   },
   semanal: {
-    "Secuencias básicas": "",
-    "Corrección de elementos": "",
-    "Elementos nuevos": "",
-    "Número de repeticiones": "",
-    "Rutinas completas": "",
-    "Rep correcciones": "",
-    "Repetición de elementos nuevos": "",
-    "Corrección de errores": "",
-    "Enlaces de rutina": "",
-    "Elementos por enlace": ""
-  }
+  "Secuencias básicas": "",
+  
+  "Corrección de elementos": "",
+  "Elementos nuevos": "",
+  "Número de repeticiones": "",
+  
+  "Rutinas completas": "",
+  "Rep correcciones": "",
+  "Repetición de elementos nuevos": "",
+  
+  "Enlaces de rutina": "",
+  "Elementos por enlace": ""
+
 };
 
 function fila(t, v){
