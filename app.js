@@ -1,6 +1,19 @@
+// 🔥 PEGA AQUÍ TU firebaseConfig
+const firebaseConfig = {
+  apiKey: "PEGA_AQUI",
+  authDomain: "PEGA_AQUI",
+  projectId: "PEGA_AQUI",
+  storageBucket: "PEGA_AQUI",
+  messagingSenderId: "PEGA_AQUI",
+  appId: "PEGA_AQUI"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 const password = "jmjm0808";
 
-let data = JSON.parse(localStorage.getItem("data")) || {
+let data = {
   obligatorios: {
     "Rep elementos corrección": "",
     "Rep elementos proyección": "",
@@ -37,66 +50,71 @@ let data = JSON.parse(localStorage.getItem("data")) || {
   }
 };
 
-function guardar() {
-  localStorage.setItem("data", JSON.stringify(data));
+function fila(t, v){
+  return `<div class="item"><div class="label">${t}</div><div class="valor">${v || "-"}</div></div>`;
 }
 
-function mostrar(tipo) {
-  let html = "<h2>" + tipo + "</h2>";
+function mostrar(tipo){
+  let html = "";
 
-  if (tipo === "obligatorios") {
-
-    html += "<div class='card'><h3>Día 1 - Rutinas</h3>";
-    html += `
-      <p>Repetición de elementos de corrección: ${data.obligatorios["Rep elementos corrección"]}</p>
-      <p>Repetición de elementos de proyección: ${data.obligatorios["Rep elementos proyección"]}</p>
-      <p>Cantidad de rutinas: ${data.obligatorios["Cantidad de rutinas"]}</p>
+  if(tipo==="obligatorios"){
+    html+=`<div class="card"><h3>Día 1 - Rutinas</h3>
+    ${fila("Repetición elementos corrección", data.obligatorios["Rep elementos corrección"])}
+    ${fila("Repetición elementos proyección", data.obligatorios["Rep elementos proyección"])}
+    ${fila("Cantidad de rutinas", data.obligatorios["Cantidad de rutinas"])}
     </div>`;
 
-    html += "<div class='card'><h3>Día 2 - Corrección y proyección</h3>";
-    html += `
-      <p>Elementos de corrección: ${data.obligatorios["D2 elementos corrección"]}</p>
-      <p>Elementos de proyección: ${data.obligatorios["D2 elementos proyección"]}</p>
+    html+=`<div class="card"><h3>Día 2 - Corrección y proyección</h3>
+    ${fila("Elementos corrección", data.obligatorios["D2 elementos corrección"])}
+    ${fila("Elementos proyección", data.obligatorios["D2 elementos proyección"])}
     </div>`;
 
-    html += "<div class='card'><h3>Día 3 - Rutinas a presentar</h3>";
-    html += `
-      <p>Rutinas sin caídas: ${data.obligatorios["Rutinas sin caídas"]}</p>
-      <p>No más de intentos: ${data.obligatorios["Intentos máximo"]}</p>
+    html+=`<div class="card"><h3>Día 3 - Rutinas a presentar</h3>
+    ${fila("Rutinas sin caídas", data.obligatorios["Rutinas sin caídas"])}
+    ${fila("No más de intentos", data.obligatorios["Intentos máximo"])}
     </div>`;
   } else {
-    for (let key in data[tipo]) {
-      html += `<div class="card"><p>${key}: ${data[tipo][key]}</p></div>`;
+    for(let k in data[tipo]){
+      html+=`<div class="card">${fila(k, data[tipo][k])}</div>`;
     }
   }
 
   document.getElementById("contenido").innerHTML = html;
 }
 
-function login() {
+function guardar(){
+  db.collection("gym").doc("data").set(data);
+}
+
+function cargar(){
+  db.collection("gym").doc("data").onSnapshot(doc=>{
+    if(doc.exists){
+      data = doc.data();
+    }
+  });
+}
+cargar();
+
+function login(){
   let pass = prompt("Contraseña:");
-  if (pass === password) editar();
+  if(pass===password) editar();
 }
 
-function editar() {
-  let html = "<h2>Modo Entrenador</h2>";
-
-  for (let tipo in data) {
-    html += "<h3>" + tipo + "</h3>";
-    for (let key in data[tipo]) {
-      html += `
-        <div class="card">
-          <label>${key}</label>
-          <textarea onchange="actualizar('${tipo}','${key}', this.value)">${data[tipo][key]}</textarea>
-        </div>
-      `;
+function editar(){
+  let html="<h2>Modo Entrenador</h2>";
+  for(let tipo in data){
+    html+=`<h3>${tipo}</h3>`;
+    for(let k in data[tipo]){
+      html+=`<div class="card">
+      <label>${k}</label>
+      <textarea onchange="actualizar('${tipo}','${k}',this.value)">${data[tipo][k]}</textarea>
+      </div>`;
     }
   }
-
-  document.getElementById("contenido").innerHTML = html;
+  document.getElementById("contenido").innerHTML=html;
 }
 
-function actualizar(tipo, key, value) {
-  data[tipo][key] = value;
+function actualizar(tipo,key,val){
+  data[tipo][key]=val;
   guardar();
 }

@@ -9,12 +9,18 @@
 
 <h1>Panel de Atleta</h1>
 
-<button onclick="mostrar('obligatorios')">Trabajo para Obligatorios</button>
-<button onclick="mostrar('sistemas')">Carga de Sistemas</button>
-<button onclick="mostrar('semanal')">Carga de Trabajo Semanal</button>
-<button onclick="login()">Edición de Entrenador</button>
+<div class="botones">
+  <button onclick="mostrar('obligatorios')">Trabajo para Obligatorios</button>
+  <button onclick="mostrar('sistemas')">Carga de Sistemas</button>
+  <button onclick="mostrar('semanal')">Carga de Trabajo Semanal</button>
+  <button onclick="login()">Edición de Entrenador</button>
+</div>
 
 <div id="contenido"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script src="app.js"></script>
 </body>
