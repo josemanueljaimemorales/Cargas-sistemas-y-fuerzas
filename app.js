@@ -48,7 +48,7 @@ let data = {
   
   "Enlaces de rutina": "",
   "Elementos por enlace": ""
-
+}
 };
 
 function fila(t, v){
@@ -74,11 +74,38 @@ function mostrar(tipo){
     ${fila("Rutinas sin caídas", data.obligatorios["Rutinas sin caídas"])}
     ${fila("No más de intentos", data.obligatorios["Intentos máximo"])}
     </div>`;
-  } else {
+  }
+
+  else if(tipo==="semanal"){
+
+    html += `<div class="card"><h3>Básicos</h3>
+      ${fila("Secuencias básicas", data.semanal["Secuencias básicas"])}
+    </div>`;
+
+    html += `<div class="card"><h3>Elementos</h3>
+      ${fila("Corrección de elementos", data.semanal["Corrección de elementos"])}
+      ${fila("Elementos nuevos", data.semanal["Elementos nuevos"])}
+      ${fila("Número de repeticiones", data.semanal["Número de repeticiones"])}
+    </div>`;
+
+    html += `<div class="card"><h3>Martes y Miércoles</h3>
+      ${fila("Rutinas completas", data.semanal["Rutinas completas"])}
+      ${fila("Rep correcciones", data.semanal["Rep correcciones"])}
+      ${fila("Repetición de elementos nuevos", data.semanal["Repetición de elementos nuevos"])}
+    </div>`;
+
+    html += `<div class="card"><h3>Viernes</h3>
+      ${fila("Enlaces de rutina", data.semanal["Enlaces de rutina"])}
+      ${fila("Elementos por enlace", data.semanal["Elementos por enlace"])}
+    </div>`;
+  }
+
+  else {
     for(let k in data[tipo]){
       html+=`<div class="card">${fila(k, data[tipo][k])}</div>`;
     }
   }
+
   document.getElementById("contenido").innerHTML = html;
 }
 
