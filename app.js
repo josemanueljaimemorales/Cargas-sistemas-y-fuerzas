@@ -14,13 +14,13 @@ const password = "jmjm0808";
 
 let data = {
   obligatorios: {
+    "Cantidad de rutinas": "",
     "Rep elementos corrección": "",
     "Rep elementos proyección": "",
-    "Cantidad de rutinas": "",
     "D2 elementos corrección": "",
     "D2 elementos proyección": "",
-    "Rutinas sin caídas": "",
-    "Intentos máximo": ""
+    "Rutinas sin penalidad grave": "",
+    "Intentos máximo de rutinas": ""
   },
 
   sistemas: {
