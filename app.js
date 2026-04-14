@@ -121,22 +121,32 @@ function cargar(){
     if(doc.exists){
       const firebaseData = doc.data();
 
+      let actualizado = false;
+
       // 🔥 fusionar estructura nueva con datos existentes
       for(let tipo in data){
-        if(!firebaseData[tipo]) firebaseData[tipo] = {};
+        if(!firebaseData[tipo]){
+          firebaseData[tipo] = {};
+          actualizado = true;
+        }
 
         for(let key in data[tipo]){
           if(firebaseData[tipo][key] === undefined){
             firebaseData[tipo][key] = "";
+            actualizado = true;
           }
         }
       }
 
       data = firebaseData;
 
-      guardar(); // 🔥 guarda la estructura corregida
+      // ✅ solo guarda si hubo cambios
+      if(actualizado){
+        db.collection("gym").doc("data").set(data);
+      }
+
     } else {
-      guardar();
+      db.collection("gym").doc("data").set(data);
     }
 
     mostrar("obligatorios");
@@ -160,7 +170,7 @@ function editar(){
     for(let k in data[tipo]){
       html+=`<div class="card">
         <label>${k}</label>
-        <textarea onchange="actualizar('${tipo}','${k}',this.value)">
+        <textarea oninput="actualizar('${tipo}','${k}',this.value)">
 ${data[tipo][k]}
         </textarea>
       </div>`;
