@@ -40,12 +40,12 @@ let data = {
   semanal: {
     "Secuencias básicas": "",
 
-    "Corrección de elementos": "",
-    "Elementos nuevos": "",
+    "Elementos a corregir": "",
+    "Elementos nuevos a trabajar": "",
     "Número de repeticiones": "",
 
     "Rutinas completas": "",
-    "Rep correcciones": "",
+    "Repeticion de correcciones": "",
     "Repetición de elementos nuevos": "",
 
     "Enlaces de rutina": "",
@@ -66,9 +66,9 @@ function mostrar(tipo){
   if(tipo==="obligatorios"){
 
     html+=`<div class="card"><h3>Día 1 - Rutinas</h3>
+    ${fila("Cantidad de rutinas", data.obligatorios["Cantidad de rutinas"])}
     ${fila("Repetición elementos corrección", data.obligatorios["Rep elementos corrección"])}
     ${fila("Repetición elementos proyección", data.obligatorios["Rep elementos proyección"])}
-    ${fila("Cantidad de rutinas", data.obligatorios["Cantidad de rutinas"])}
     </div>`;
 
     html+=`<div class="card"><h3>Día 2 - Corrección y proyección</h3>
@@ -77,8 +77,8 @@ function mostrar(tipo){
     </div>`;
 
     html+=`<div class="card"><h3>Día 3 - Rutinas a presentar</h3>
-    ${fila("Rutinas sin caídas", data.obligatorios["Rutinas sin caídas"])}
-    ${fila("No más de intentos", data.obligatorios["Intentos máximo"])}
+    ${fila("Rutinas sin penalidad grave", data.obligatorios["Rutinas sin caídas"])}
+    ${fila("No más de intentos de rutina", data.obligatorios["Intentos máximo"])}
     </div>`;
   }
 
@@ -89,14 +89,14 @@ function mostrar(tipo){
     </div>`;
 
     html += `<div class="card"><h3>Elementos</h3>
-      ${fila("Corrección de elementos", data.semanal["Corrección de elementos"])}
-      ${fila("Elementos nuevos", data.semanal["Elementos nuevos"])}
+      ${fila("Elementos a corregir", data.semanal["Corrección de elementos"])}
+      ${fila("Elementos nuevos a trabajar", data.semanal["Elementos nuevos"])}
       ${fila("Número de repeticiones", data.semanal["Número de repeticiones"])}
     </div>`;
 
     html += `<div class="card"><h3>Martes y Miércoles</h3>
       ${fila("Rutinas completas", data.semanal["Rutinas completas"])}
-      ${fila("Rep correcciones", data.semanal["Rep correcciones"])}
+      ${fila("Repeticion de correcciones", data.semanal["Rep correcciones"])}
       ${fila("Repetición de elementos nuevos", data.semanal["Repetición de elementos nuevos"])}
     </div>`;
 
