@@ -119,11 +119,27 @@ function guardar(){
 function cargar(){
   db.collection("gym").doc("data").onSnapshot(doc=>{
     if(doc.exists){
-      data = doc.data();
+      const firebaseData = doc.data();
+
+      // 🔥 fusionar estructura nueva con datos existentes
+      for(let tipo in data){
+        if(!firebaseData[tipo]) firebaseData[tipo] = {};
+
+        for(let key in data[tipo]){
+          if(firebaseData[tipo][key] === undefined){
+            firebaseData[tipo][key] = "";
+          }
+        }
+      }
+
+      data = firebaseData;
+
+      guardar(); // 🔥 guarda la estructura corregida
     } else {
-      guardar(); // crea el doc si no existe
+      guardar();
     }
-    mostrar("obligatorios"); // pantalla inicial
+
+    mostrar("obligatorios");
   });
 }
 
