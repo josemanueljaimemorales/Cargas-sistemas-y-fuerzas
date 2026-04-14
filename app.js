@@ -67,8 +67,8 @@ function mostrar(tipo){
 
     html+=`<div class="card"><h3>Día 1 - Rutinas</h3>
     ${fila("Cantidad de rutinas", data.obligatorios["Cantidad de rutinas"])}
-    ${fila("Repetición elementos corrección", data.obligatorios["Rep elementos corrección"])}
-    ${fila("Repetición elementos proyección", data.obligatorios["Rep elementos proyección"])}
+    ${fila("Repetición elementos corrección", data.obligatorios["Repetición elementos corrección"])}
+    ${fila("Repetición elementos proyección", data.obligatorios["Repetición elementos proyección"])}
     </div>`;
 
     html+=`<div class="card"><h3>Día 2 - Corrección y proyección</h3>
@@ -77,8 +77,8 @@ function mostrar(tipo){
     </div>`;
 
     html+=`<div class="card"><h3>Día 3 - Rutinas a presentar</h3>
-    ${fila("Rutinas sin penalidad grave", data.obligatorios["Rutinas sin caídas"])}
-    ${fila("No más de intentos de rutina", data.obligatorios["Intentos máximo"])}
+    ${fila("Rutinas sin penalidad grave", data.obligatorios["Rutinas sin penalidad grave"])}
+    ${fila("Intentos máximo de rutina", data.obligatorios["Intentos máximo de rutina"])}
     </div>`;
   }
 
@@ -89,14 +89,14 @@ function mostrar(tipo){
     </div>`;
 
     html += `<div class="card"><h3>Elementos</h3>
-      ${fila("Elementos a corregir", data.semanal["Corrección de elementos"])}
-      ${fila("Elementos nuevos a trabajar", data.semanal["Elementos nuevos"])}
+      ${fila("Elementos a corregir", data.semanal["Elementos a corregir"])}
+      ${fila("Elementos nuevos a trabajar", data.semanal["Elementos nuevos a trabajar"])}
       ${fila("Número de repeticiones", data.semanal["Número de repeticiones"])}
     </div>`;
 
     html += `<div class="card"><h3>Martes y Miércoles</h3>
       ${fila("Rutinas completas", data.semanal["Rutinas completas"])}
-      ${fila("Repeticion de correcciones", data.semanal["Rep correcciones"])}
+      ${fila("Repeticion de correcciones", data.semanal["Repeticion de correcciones"])}
       ${fila("Repetición de elementos nuevos", data.semanal["Repetición de elementos nuevos"])}
     </div>`;
 
