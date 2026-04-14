@@ -39,15 +39,12 @@ let data = {
 
   semanal: {
     "Secuencias básicas": "",
-
     "Elementos a corregir": "",
     "Elementos nuevos a trabajar": "",
     "Número de repeticiones": "",
-
     "Rutinas completas": "",
     "Repeticion de correcciones": "",
     "Repetición de elementos nuevos": "",
-
     "Enlaces de rutina": "",
     "Elementos por enlace": ""
   }
@@ -56,7 +53,7 @@ let data = {
 function fila(t, v){
   return `<div class="item">
     <div class="label">${t}</div>
-    <div class="valor">${v || "-"}</div>
+    <div class="valor">${v ? v : "Sin asignar"}</div>
   </div>`;
 }
 
@@ -67,8 +64,8 @@ function mostrar(tipo){
 
     html+=`<div class="card"><h3>Día 1 - Rutinas</h3>
     ${fila("Cantidad de rutinas", data.obligatorios["Cantidad de rutinas"])}
-    ${fila("Repetición elementos corrección", data.obligatorios["Repetición elementos corrección"])}
-    ${fila("Repetición elementos proyección", data.obligatorios["Repetición elementos proyección"])}
+    ${fila("Repetición elementos corrección", data.obligatorios["Rep elementos corrección"])}
+    ${fila("Repetición elementos proyección", data.obligatorios["Rep elementos proyección"])}
     </div>`;
 
     html+=`<div class="card"><h3>Día 2 - Corrección y proyección</h3>
@@ -78,7 +75,7 @@ function mostrar(tipo){
 
     html+=`<div class="card"><h3>Día 3 - Rutinas a presentar</h3>
     ${fila("Rutinas sin penalidad grave", data.obligatorios["Rutinas sin penalidad grave"])}
-    ${fila("Intentos máximo de rutina", data.obligatorios["Intentos máximo de rutina"])}
+    ${fila("Intentos máximo de rutina", data.obligatorios["Intentos máximo de rutinas"])}
     </div>`;
   }
 
@@ -106,9 +103,9 @@ function mostrar(tipo){
     </div>`;
   }
 
-  else {
-    for(let k in data[tipo]){
-      html+=`<div class="card">${fila(k, data[tipo][k])}</div>`;
+  else if(tipo==="sistemas"){
+    for(let k in data.sistemas){
+      html+=`<div class="card">${fila(k, data.sistemas[k])}</div>`;
     }
   }
 
@@ -123,9 +120,13 @@ function cargar(){
   db.collection("gym").doc("data").onSnapshot(doc=>{
     if(doc.exists){
       data = doc.data();
+    } else {
+      guardar(); // crea el doc si no existe
     }
+    mostrar("obligatorios"); // pantalla inicial
   });
 }
+
 cargar();
 
 function login(){
@@ -135,6 +136,7 @@ function login(){
 
 function editar(){
   let html="<h2>Modo Entrenador</h2>";
+  html+=`<button onclick="mostrar('obligatorios')">⬅ Salir</button>`;
 
   for(let tipo in data){
     html+=`<h3>${tipo}</h3>`;
