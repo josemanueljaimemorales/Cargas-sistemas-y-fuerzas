@@ -12,6 +12,9 @@ const db = firebase.firestore();
 
 const password = "jmjm0808";
 
+// 🔥 CONTROL DE MODO
+let modoEdicion = false;
+
 let data = {
   obligatorios: {
     "Cantidad de rutinas": "",
@@ -123,7 +126,6 @@ function cargar(){
 
       let actualizado = false;
 
-      // 🔥 fusionar estructura nueva con datos existentes
       for(let tipo in data){
         if(!firebaseData[tipo]){
           firebaseData[tipo] = {};
@@ -140,7 +142,6 @@ function cargar(){
 
       data = firebaseData;
 
-      // ✅ solo guarda si hubo cambios
       if(actualizado){
         db.collection("gym").doc("data").set(data);
       }
@@ -149,7 +150,10 @@ function cargar(){
       db.collection("gym").doc("data").set(data);
     }
 
-    mostrar("obligatorios");
+    // 🔥 SOLO refresca si NO estás editando
+    if(!modoEdicion){
+      mostrar("obligatorios");
+    }
   });
 }
 
@@ -161,8 +165,10 @@ function login(){
 }
 
 function editar(){
+  modoEdicion = true;
+
   let html="<h2>Modo Entrenador</h2>";
-  html+=`<button onclick="mostrar('obligatorios')">⬅ Salir</button>`;
+  html+=`<button onclick="salirEdicion()">⬅ Salir</button>`;
 
   for(let tipo in data){
     html+=`<h3>${tipo}</h3>`;
@@ -178,6 +184,11 @@ ${data[tipo][k]}
   }
 
   document.getElementById("contenido").innerHTML=html;
+}
+
+function salirEdicion(){
+  modoEdicion = false;
+  mostrar("obligatorios");
 }
 
 function actualizar(tipo,key,val){
